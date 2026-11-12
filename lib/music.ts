@@ -105,9 +105,11 @@ const TRACKS: Record<TrackId, { src: string; title: string }> = {
 //   of music is intentional. Tracks never loop.
 const SCENE_MUSIC: Record<string, SceneMusic> = {
   // CH 01 — The beginning — an invitation toward love.
+  // Silent on purpose: the opening heart screen has no music. The first song
+  // (Vizhi Veekura) starts when the story moves on to chapter 02.
   splash: {
-    track: 'munbe', volume: 0.16, fadeSeconds: 4.8, mood: 'dream',
-    title: 'Munbe Vaa',
+    track: null, volume: 0, fadeSeconds: 1, mood: 'silence',
+    title: 'quiet for this chapter',
     whisper: 'before the story had a name, there was already a quiet feeling asking you to come a little closer.',
   },
 
