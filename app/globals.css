@@ -1,0 +1,759 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@300;400;600&family=Inspiration&family=Parisienne&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   GLOBAL RESETS & BASE
+   =========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: #140810;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #140810;
+  color: #fff8f8;
+  font-family: 'Cormorant Garamond', serif;
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+  cursor: default;
+}
+
+/* ===========================
+   CINEMATIC SCROLLABLE WRAPPER
+   =========================== */
+#main-scroll {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #3a0a20 #000;
+}
+
+#main-scroll::-webkit-scrollbar {
+  width: 2px;
+}
+
+#main-scroll::-webkit-scrollbar-track {
+  background: #000;
+}
+
+#main-scroll::-webkit-scrollbar-thumb {
+  background: #3a0a20;
+}
+
+/* ===========================
+   SCENE BASE
+   =========================== */
+.scene {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+  /* keep every page's content clear of the music button (top) and heart (bottom) */
+  padding: clamp(52px, 7.5dvh, 80px) clamp(16px, 4vw, 36px) clamp(44px, 6.5dvh, 68px);
+  min-height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: safe center;
+  flex-direction: column;
+  scroll-snap-align: start;
+  /* If a page is taller than the screen, it scrolls instead of hiding the button */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(196, 48, 107, 0.5) transparent;
+}
+
+/* Scenes with moving decorations that start off-screen stay clipped */
+.scene.scene-clip {
+  overflow: hidden;
+}
+
+/* Keeps the last element clear of the bottom edge when a page scrolls */
+.scene > :last-child {
+  margin-bottom: 8px;
+}
+
+/* ===========================
+   TYPOGRAPHY
+   =========================== */
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.text-romantic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+/* ===========================
+   HEART SVG
+   =========================== */
+.heart-container svg {
+  filter: drop-shadow(0 0 20px rgba(180, 0, 50, 0.5));
+  transition: filter 0.3s ease, transform 0.1s ease;
+}
+
+.heart-container svg:hover {
+  filter: drop-shadow(0 0 45px rgba(220, 0, 80, 0.8));
+}
+
+/* ===========================
+   EYE ANIMATION
+   =========================== */
+.eyelid {
+  transition: height 3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================
+   PARTICLES
+   =========================== */
+@keyframes particle-float {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(var(--tx), var(--ty));
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-float 1.8s ease-out forwards;
+}
+
+/* ===========================
+   GLOW EFFECTS
+   =========================== */
+.glow-red {
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.5),
+    0 0 60px rgba(139, 0, 0, 0.2);
+}
+
+.glow-rose {
+  box-shadow: 0 0 40px rgba(196, 30, 58, 0.6),
+    0 0 80px rgba(196, 30, 58, 0.2);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 20px rgba(139, 0, 0, 0.8),
+    0 0 40px rgba(139, 0, 0, 0.4);
+}
+
+.text-glow-rose {
+  text-shadow: 0 0 15px rgba(196, 30, 58, 0.9),
+    0 0 30px rgba(196, 30, 58, 0.5);
+}
+
+/* ===========================
+   BUTTONS — cute pill, gradient, glow
+   =========================== */
+.btn-romantic {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c4306b 0%, #ff8fb3 100%);
+  color: #fff9fb;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(196, 48, 107, 0.3);
+}
+
+.btn-romantic:hover {
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 28px rgba(196, 48, 107, 0.45);
+  background: linear-gradient(135deg, #a8305a 0%, #ff9fc0 100%);
+}
+
+.btn-romantic:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ===========================
+   GRADIENT / CURSIVE ACCENT TEXT
+   =========================== */
+.text-gradient-romantic {
+  background: linear-gradient(90deg, #ffd7e0 0%, #ffb6c1 30%, #ffe8a3 60%, #ff9fc0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(255, 159, 192, 0.35));
+}
+
+.font-script {
+  font-family: 'Parisienne', 'Inspiration', cursive;
+}
+
+/* ===========================
+   FLOURISH DIVIDER
+   =========================== */
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #7a2a40;
+  opacity: 0.8;
+  user-select: none;
+}
+
+.flourish::before,
+.flourish::after {
+  content: '';
+  height: 1px;
+  width: 28px;
+  background: linear-gradient(90deg, transparent, #7a2a40);
+}
+
+.flourish::after {
+  background: linear-gradient(90deg, #7a2a40, transparent);
+}
+
+/* ===========================
+   INPUT
+   =========================== */
+.input-romantic {
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-bottom: 1px solid rgba(196, 48, 107, 0.35);
+  border-radius: 8px 8px 0 0;
+  color: #5a2438;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  text-align: center;
+  letter-spacing: 2px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.input-romantic:focus {
+  border-bottom-color: #c4306b;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.input-romantic::placeholder {
+  color: #c48aa0;
+  font-style: italic;
+}
+
+/* ===========================
+   GRAIN OVERLAY
+   =========================== */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===========================
+   SCROLL LOCK
+   =========================== */
+body.scroll-locked #main-scroll {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+body.scroll-locked #main-scroll>* {
+  pointer-events: all;
+}
+
+/* ===========================
+   VIGNETTE
+   =========================== */
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  /* A barely-there warm exposure falloff — like soft camera vignetting,
+     not a dark horror-movie edge. Never darkens toward black. */
+  background: radial-gradient(ellipse at center,
+      transparent 55%,
+      rgba(196, 130, 100, 0.05) 85%,
+      rgba(196, 130, 100, 0.1) 100%);
+}
+
+/* ===========================
+   MOBILE ADJUSTMENTS
+   =========================== */
+@media (max-width: 640px) {
+  .btn-romantic {
+    letter-spacing: 4px;
+    padding: 12px 24px;
+  }
+}
+
+/* ===========================
+   SWIPE IMAGES
+   =========================== */
+.swipe-photo {
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  background: linear-gradient(135deg, #3a1020 0%, #1a0510 100%);
+  box-shadow: 0 8px 24px rgba(139, 0, 50, 0.25), inset 0 0 30px rgba(255, 111, 165, 0.08);
+  overflow: hidden;
+}
+
+/* ===========================
+   NO BUTTON ESCAPE
+   =========================== */
+.no-escape {
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* ===========================
+   PROGRESS BAR
+   =========================== */
+.progress-fill {
+  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #8b0000, #c41e3a, #ff6680);
+  box-shadow: 0 0 8px rgba(196, 30, 58, 0.6);
+}
+/* ===========================
+   KEEPSAKE PRINT VIEW
+   -----------------------------
+   Hidden on screen at all times. When "Save as PDF" triggers window.print(),
+   this becomes the only visible thing on the page — the app's own scenes,
+   overlays, and UI are all hidden via @media print below.
+   =========================== */
+#keepsake-print-root {
+  display: none;
+}
+
+#keepsake-print-root .kp-cover {
+  text-align: center;
+  padding: 90px 40px;
+  background: radial-gradient(ellipse at top, #4a1830 0%, #2a1020 55%, #140810 100%);
+  color: #ffe3ec;
+}
+
+#keepsake-print-root .kp-label {
+  letter-spacing: 6px;
+  font-size: 12px;
+  color: #e8a8c0;
+  text-transform: uppercase;
+}
+
+#keepsake-print-root .kp-cover h1 {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 52px;
+  margin: 18px 0;
+  color: #ffd7e6;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+#keepsake-print-root .kp-date {
+  font-size: 12px;
+  color: #c98aa0;
+}
+
+#keepsake-print-root .kp-page {
+  background: #fff8f5;
+  padding: 48px 56px;
+  border-bottom: 2px solid #f0d8de;
+  page-break-after: always;
+}
+
+#keepsake-print-root .kp-heading {
+  font-size: 22px;
+  color: #8b0032;
+  font-style: italic;
+  text-align: center;
+  margin: 0 0 8px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+#keepsake-print-root .kp-rule {
+  width: 80px;
+  height: 2px;
+  background: #e8a8c0;
+  margin: 0 auto 26px;
+}
+
+#keepsake-print-root .kp-sub {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b5406a;
+  margin: 18px 0 4px;
+}
+
+#keepsake-print-root .kp-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4a1425;
+  white-space: pre-line;
+  margin: 0 0 10px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+#keepsake-print-root .kp-footer {
+  text-align: center;
+  padding: 30px;
+  color: #c98aa0;
+  font-style: italic;
+  font-size: 13px;
+  background: #fff8f5;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #keepsake-print-root,
+  #keepsake-print-root * {
+    visibility: visible;
+  }
+  #keepsake-print-root {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* ===========================
+   DREAM-SOUNDTRACK ATMOSPHERE
+   -----------------------------
+   A nearly invisible color wash follows the current song's emotional
+   character. It sits behind the scenes, so it never competes with content.
+   =========================== */
+.story-mood-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1;
+  transition: background 1.8s ease, opacity 1.8s ease;
+  mix-blend-mode: soft-light;
+}
+
+.music-whisper {
+  position: fixed;
+  left: 50%;
+  bottom: 7.5vh;
+  transform: translateX(-50%);
+  z-index: 45;
+  width: min(88vw, 520px);
+  padding: 11px 18px 13px;
+  text-align: center;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(24, 10, 18, 0.22);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: 0 12px 34px rgba(30, 8, 20, 0.09), inset 0 0 0 1px rgba(255,255,255,0.035);
+}
+
+.music-whisper-title {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  line-height: 1.2;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 235, 244, 0.64);
+  margin-bottom: 4px;
+}
+
+.music-whisper-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(13px, 2.7vw, 17px);
+  line-height: 1.35;
+  letter-spacing: 0.025em;
+  color: rgba(255, 247, 250, 0.92);
+  text-shadow: 0 1px 14px rgba(40, 8, 20, 0.2);
+}
+
+.music-control-panel {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: min(82vw, 390px);
+  padding: 8px 10px 8px 13px;
+  border-radius: 999px;
+  background: rgba(20, 5, 10, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f7d9e4;
+  box-shadow: 0 10px 28px rgba(40, 8, 20, 0.16);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+}
+
+.music-control-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.music-control-kicker {
+  font-family: 'Cinzel', serif;
+  font-size: 6px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 220, 232, 0.52);
+  white-space: nowrap;
+}
+
+.music-control-track {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+  color: rgba(255, 246, 250, 0.92);
+}
+
+.music-volume {
+  width: 56px;
+  accent-color: #e88bab;
+}
+
+.music-mini-action {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 220, 232, 0.72);
+  font-family: 'Cinzel', serif;
+  font-size: 6px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 5px 2px;
+}
+
+.music-orb {
+  position: relative;
+  width: 39px;
+  height: 39px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(20, 5, 10, 0.50);
+  color: #efabc5;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 7px 22px rgba(35, 7, 18, 0.14);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.music-orb:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+
+.music-orb[data-playing="true"] {
+  animation: music-orb-breathe 3.4s ease-in-out infinite;
+}
+
+.music-orb-heart {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.music-orb-note {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+@keyframes music-orb-breathe {
+  0%, 100% { box-shadow: 0 0 10px rgba(232, 139, 171, 0.18), 0 7px 22px rgba(35, 7, 18, 0.14); }
+  50% { box-shadow: 0 0 21px rgba(232, 139, 171, 0.38), 0 7px 28px rgba(35, 7, 18, 0.18); }
+}
+
+@media (max-width: 640px) {
+  .music-whisper {
+    bottom: 5.5vh;
+    border-radius: 20px;
+    padding-inline: 15px;
+  }
+
+  .music-control-panel {
+    max-width: 78vw;
+  }
+
+  .music-control-track {
+    max-width: 92px;
+  }
+}
+
+/* Final-pass soundtrack polish: each music mood gets a slightly different
+   emotional atmosphere without overpowering the existing artwork/text. */
+.story-mood-veil {
+  opacity: 0.92;
+  transition: background 2.2s ease, opacity 1.8s ease;
+}
+
+.music-whisper {
+  background: rgba(24, 10, 18, 0.18);
+  border-color: rgba(255, 236, 244, 0.12);
+  box-shadow: 0 16px 42px rgba(30, 8, 20, 0.08), inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.music-whisper-line {
+  letter-spacing: 0.018em;
+}
+
+/* ===========================
+   FIRST-SCREEN PHOTO WALL + PHOTO RAIN
+   =========================== */
+@keyframes wall-up { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,-50%,0); } }
+@keyframes wall-down { from { transform: translate3d(0,-50%,0); } to { transform: translate3d(0,0,0); } }
+@keyframes gate-float {
+  0% { transform: translate3d(0,0,0) scale(0.7); opacity: 0; }
+  12% { opacity: 0.85; }
+  100% { transform: translate3d(var(--sway, 20px),-112vh,0) scale(1.25); opacity: 0; }
+}
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+  50% { transform: translate3d(8%, 6%, 0) scale(1.18); }
+}
+@keyframes twinkle { 0%, 100% { opacity: 0.25; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes photo-rise {
+  0% { transform: translate3d(0,0,0) rotate(var(--rot)); opacity: 0; }
+  8% { opacity: 0.95; }
+  92% { opacity: 0.95; }
+  100% { transform: translate3d(0,-120vh,0) rotate(calc(var(--rot) * -1)); opacity: 0; }
+}
+.photo-rise {
+  position: absolute;
+  bottom: -170px;
+  width: 66px;
+  padding: 4px 4px 12px;
+  background: #fffaf7;
+  box-shadow: 0 8px 20px rgba(139, 48, 88, 0.28);
+  animation: photo-rise var(--dur) linear var(--delay) infinite;
+  opacity: 0;
+  will-change: transform;
+}
+@media (max-width: 719px) { .wall-col:nth-child(n+4) { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .wall-col > div, .photo-rise, .gate-float { animation: none !important; }
+}
+@media (max-width: 719px) {
+  .photo-rise-layer {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 36%, transparent 46%, transparent 79%, #000 89%, #000 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 36%, transparent 46%, transparent 79%, #000 89%, #000 100%);
+  }
+}
+
+
+/* ===========================
+   YES / NO — always clearly readable
+   =========================== */
+.btn-yes,
+.btn-no {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  padding: 14px 34px;
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, #b3225f 0%, #e8558f 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 2px rgba(90, 10, 40, 0.45);
+  box-shadow: 0 8px 22px rgba(179, 34, 95, 0.4);
+}
+
+.btn-no {
+  background: #ffffff;
+  color: #9a1f55;
+  border: 2px solid #b3225f;
+  box-shadow: 0 6px 18px rgba(179, 34, 95, 0.22);
+}
+
+.btn-yes:hover,
+.btn-no:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.btn-yes:active,
+.btn-no:active {
+  transform: scale(0.97);
+}
+
+/* The big "keep this moment" call-to-action */
+.btn-keep {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 16px 34px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #b3225f 0%, #ff7aa8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 2px rgba(90, 10, 40, 0.5);
+  box-shadow: 0 10px 28px rgba(179, 34, 95, 0.5), 0 0 0 6px rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  animation: keep-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes keep-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 10px 28px rgba(179, 34, 95, 0.5), 0 0 0 6px rgba(255, 255, 255, 0.35); }
+  50% { transform: scale(1.05); box-shadow: 0 12px 34px rgba(179, 34, 95, 0.65), 0 0 0 12px rgba(255, 255, 255, 0.15); }
+}
