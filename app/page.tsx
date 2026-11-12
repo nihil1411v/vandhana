@@ -38,6 +38,9 @@ import CursorHearts from '@/components/CursorHearts'
 import TapToBeginGate from '@/components/TapToBeginGate'
 import SceneTransition from '@/components/SceneTransition'
 import ChapterIndicator from '@/components/ChapterIndicator'
+import { startPreload } from '@/lib/preload'
+import { getStoryTrackSrcs } from '@/lib/music'
+import { WALL_THUMBS, ROOT_IMAGES, PHOTOS, MUSIC_FILES } from '@/lib/assetManifest'
 
 export type Scene =
   | 'splash'
@@ -80,6 +83,18 @@ export default function Home() {
 
   const unlockScroll = useCallback(() => {
     setScrollLocked(false)
+  }, [])
+
+  // Start downloading every photo + song the moment the site opens, while the
+  // opening screen plays, so no scene has to wait on the network later.
+  useEffect(() => {
+    const story = getStoryTrackSrcs()
+    startPreload({
+      criticalImages: [...WALL_THUMBS, ...ROOT_IMAGES, '/photos/us-watercolor.webp'],
+      otherImages: PHOTOS,
+      criticalAudio: story.slice(0, 3), // splash, hero, heart
+      otherAudio: [...story, ...MUSIC_FILES.filter(f => !story.includes(f))],
+    })
   }, [])
 
   useEffect(() => {

@@ -12,6 +12,7 @@ export function ZoomImg({ file, tight = false, dir = 'photos' }: { file: string;
       src={`/${dir}/${file}`}
       alt=""
       draggable={false}
+      decoding="async"
       style={{
         display: 'block',
         width: '100%',

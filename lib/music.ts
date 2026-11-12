@@ -1,5 +1,7 @@
 'use client'
 
+import { getCachedAudioSrc, bumpAudio } from '@/lib/preload'
+
 export type TrackId =
   | 'helloViolin'
   | 'snehithane'
@@ -344,8 +346,33 @@ function savePrefs() {
   window.localStorage.setItem(MUTE_KEY, muted ? '1' : '0')
 }
 
-function makeAudio(src: string, index: number) {
-  const audio = new Audio(src)
+/** Song files in story order (used by the preloader to download them ahead of time). */
+export function getStoryTrackSrcs(): string[] {
+  const out: string[] = []
+  for (const meta of Object.values(SCENE_MUSIC)) {
+    if (!meta.track) continue
+    const src = TRACKS[meta.track].src
+    if (!out.includes(src)) out.push(src)
+  }
+  return out
+}
+
+/** Tell the preloader which songs the next few scenes need, so they download first. */
+function bumpUpcoming(sceneId: string) {
+  const ids = Object.keys(SCENE_MUSIC)
+  const i = ids.indexOf(sceneId)
+  if (i < 0) return
+  const srcs: string[] = []
+  for (const id of ids.slice(i, i + 4)) {
+    const t = SCENE_MUSIC[id].track
+    if (t) srcs.push(TRACKS[t].src)
+  }
+  bumpAudio(srcs)
+}
+
+function makeAudio(index: number) {
+  // No src here — setting one would start a second download of the first song.
+  const audio = new Audio()
   audio.preload = 'auto'
   audio.loop = true
   audio.volume = 0
@@ -363,7 +390,7 @@ function makeAudio(src: string, index: number) {
 
 function ensureAudio() {
   if (typeof window === 'undefined') return null
-  if (!audioPair) audioPair = [makeAudio(TRACKS.munbe.src, 0), makeAudio(TRACKS.munbe.src, 1)]
+  if (!audioPair) audioPair = [makeAudio(0), makeAudio(1)]
   return audioPair
 }
 
@@ -422,7 +449,8 @@ function startTrack(track: TrackId, fadeSeconds: number) {
   const nextIndex = activeIndex === 0 ? 1 : 0
   const next = pair[nextIndex]
   const prev = pair[activeIndex]
-  const src = TRACKS[track].src
+  // the preloaded in-memory copy when ready, otherwise the normal network URL
+  const src = getCachedAudioSrc(TRACKS[track].src)
 
   if (activeTrack === track && !prev.paused) {
     tweenVolume(prev, effectiveVolume(), 700)
@@ -498,6 +526,7 @@ export function beginMusic() {
 export function playChapterMusic(sceneId: string) {
   if (!running) return
   setMeta(sceneId)
+  bumpUpcoming(sceneId)
 
   if (!currentMeta.track) {
     stopPair(currentMeta.fadeSeconds)

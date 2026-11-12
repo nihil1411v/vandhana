@@ -7,6 +7,7 @@ import { HER_NAME, WALL_PHOTOS } from '@/lib/config'
 import { ZoomImg } from '@/components/PhotoFrame'
 import { focusOf } from '@/lib/photoFocus'
 import HeartPhoto from '@/components/HeartPhoto'
+import { getCriticalProgress, subscribePreload } from '@/lib/preload'
 
 interface Props {
   onBegin: () => void
@@ -53,6 +54,16 @@ function PhotoWall() {
 export default function TapToBeginGate({ onBegin }: Props) {
   const [leaving, setLeaving] = useState(false)
   const [step, setStep] = useState(0)
+  // photos + first songs are downloaded behind this screen; "open it" waits for them
+  const [load, setLoad] = useState(() => getCriticalProgress())
+  const [gaveUp, setGaveUp] = useState(false) // slow network: never leave her stuck here
+  const ready = load.ready || gaveUp
+  const pct = load.total ? Math.min(99, Math.round((load.done / load.total) * 100)) : 0
+  useEffect(() => subscribePreload(() => setLoad(getCriticalProgress())), [])
+  useEffect(() => {
+    const t = setTimeout(() => setGaveUp(true), 15000)
+    return () => clearTimeout(t)
+  }, [])
   const [floaters, setFloaters] = useState<
     { id: number; left: number; delay: number; dur: number; size: number; glyph: string; sway: number }[]
   >([])
@@ -95,7 +106,7 @@ export default function TapToBeginGate({ onBegin }: Props) {
   )
 
   const begin = () => {
-    if (leaving || step < 4) return
+    if (leaving || step < 4 || !ready) return
     unlockAudio()
     playPageTurn()
     // AmbientAudio listens for this event to unlock and begin the soundtrack on this tap.
@@ -109,7 +120,7 @@ export default function TapToBeginGate({ onBegin }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 overflow-hidden select-none"
-      style={{ background: '#12040b', cursor: step >= 4 ? 'pointer' : 'default' }}
+      style={{ background: '#12040b', cursor: step >= 4 && ready ? 'pointer' : 'default' }}
       onClick={begin}
     >
       {/* 1 — the living wall of photos */}
@@ -275,7 +286,7 @@ export default function TapToBeginGate({ onBegin }: Props) {
                 }}
                 transition={{ opacity: { duration: 1 }, y: { duration: 1 }, boxShadow: { duration: 2.4, repeat: Infinity } }}
               >
-                open it
+                {ready ? 'open it' : `getting it ready ${pct}%`}
               </motion.div>
             )}
           </AnimatePresence>

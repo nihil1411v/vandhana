@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "gen-assets": "node scripts/gen-assets.js",
+    "predev": "node scripts/gen-assets.js",
     "dev": "next dev",
+    "prebuild": "node scripts/gen-assets.js",
     "build": "next build",
     "start": "next start"
   },
