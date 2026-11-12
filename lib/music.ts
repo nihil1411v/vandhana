@@ -105,11 +105,9 @@ const TRACKS: Record<TrackId, { src: string; title: string }> = {
 //   of music is intentional. Tracks never loop.
 const SCENE_MUSIC: Record<string, SceneMusic> = {
   // CH 01 — The beginning — an invitation toward love.
-  // Silent on purpose: the opening heart screen has no music. The first song
-  // (Vizhi Veekura) starts when the story moves on to chapter 02.
   splash: {
-    track: null, volume: 0, fadeSeconds: 1, mood: 'silence',
-    title: 'quiet for this chapter',
+    track: 'munbe', volume: 0.16, fadeSeconds: 4.8, mood: 'dream',
+    title: 'Munbe Vaa',
     whisper: 'before the story had a name, there was already a quiet feeling asking you to come a little closer.',
   },
 
@@ -466,6 +464,7 @@ function startTrack(track: TrackId, fadeSeconds: number) {
   const target = effectiveVolume()
 
   next.pause()
+  next.muted = false
   next.src = src
   next.currentTime = 0
   next.loop = true
@@ -514,6 +513,30 @@ export function retryIfBlocked() {
   } else if (!activeTrack && currentMeta.track) {
     startTrack(currentMeta.track, 0.8)
   }
+}
+
+/**
+ * Called on the opening tap. Plays both audio elements silently for an instant so
+ * browsers (iOS Safari especially) treat them as user-unlocked; the real song can then
+ * start a moment later, when the next screen appears, without needing another tap.
+ */
+export function primeAudio() {
+  const pair = ensureAudio()
+  if (!pair) return
+  pair.forEach(audio => {
+    audio.muted = true
+    audio.src = getCachedAudioSrc(TRACKS[currentMeta.track ?? 'munbe'].src)
+    const release = () => {
+      // startTrack un-mutes an element it takes over — if so, leave it playing
+      if (!audio.muted) return
+      audio.pause()
+      audio.currentTime = 0
+      audio.muted = false
+    }
+    const p = audio.play()
+    if (p && typeof p.then === 'function') p.then(release).catch(() => { audio.muted = false })
+    else release()
+  })
 }
 
 export function beginMusic() {

@@ -7,6 +7,7 @@ import {
   getMusicSnapshot,
   getUserVolume,
   playChapterMusic,
+  primeAudio,
   retryIfBlocked,
   setUserVolume,
   toggleMuted,
@@ -53,7 +54,9 @@ export default function AmbientAudio({ scene }: Props) {
     const handleBegin = () => {
       window.sessionStorage.setItem('love-story-audio-started', '1')
       beginMusic()
-      playChapterMusic('splash')
+      // Unlock the audio on this tap, but stay silent: the chapter 1 song starts
+      // when the "Happy Birthday" screen actually appears (the [started, scene] effect below).
+      primeAudio()
       setStarted(true)
     }
     window.addEventListener('love-story-begin', handleBegin)
@@ -62,6 +65,8 @@ export default function AmbientAudio({ scene }: Props) {
 
   // If the browser blocked autoplay, the very next tap / key press starts the music.
   useEffect(() => {
+    // The opening gate has no scene — taps there must never start music.
+    if (!scene) return
     const nudge = () => retryIfBlocked()
     window.addEventListener('pointerdown', nudge, { passive: true })
     window.addEventListener('keydown', nudge)
@@ -71,7 +76,7 @@ export default function AmbientAudio({ scene }: Props) {
       window.removeEventListener('keydown', nudge)
       window.removeEventListener('touchstart', nudge)
     }
-  }, [])
+  }, [scene])
 
   useEffect(() => {
     const handleCue = () => triggerSceneMusicCue()
