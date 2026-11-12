@@ -53,10 +53,10 @@ export const REASONS: string[] = [
 
 // One portrait for each reason above (same order).
 export const REASON_PHOTOS: string[] = [
-  'her-face1.jpg', 'her-red2.jpg', 'her-bw4.jpg', 'her-hand2.jpg', 'her-violet.jpg', 'her-saree3.jpg',
-  'her-moody.jpg', 'her-face2.jpg', 'her-bw5.jpg', 'her-palms.jpg', 'her-face3.jpg', 'her-bw6.jpg',
-  'her-face4.jpg', 'her-hand.jpg', 'her-face5.jpg', 'her-forest.jpg', 'her-face6.jpg', 'her-sel-bracelet.jpg',
-  'her-face7.jpg', 'her-campus.jpg', 'her-face8.jpg', 'her-sel-white.jpg', 'her-rocks.jpg', 'her-sel-navy.jpg',
+  'her-face1.webp', 'her-red2.webp', 'her-bw4.webp', 'her-hand2.webp', 'her-violet.webp', 'her-saree3.webp',
+  'her-moody.webp', 'her-face2.webp', 'her-bw5.webp', 'her-palms.webp', 'her-face3.webp', 'her-bw6.webp',
+  'her-face4.webp', 'her-hand.webp', 'her-face5.webp', 'her-forest.webp', 'her-face6.webp', 'her-sel-bracelet.webp',
+  'her-face7.webp', 'her-campus.webp', 'her-face8.webp', 'her-sel-white.webp', 'her-rocks.webp', 'her-sel-navy.webp',
 ]
 
 // Memory timeline — edit these to your real milestones.
@@ -70,32 +70,32 @@ export interface Memory {
 
 export const MEMORIES: Memory[] = [
   {
-    photo: 'her-sel-bracelet.jpg',
+    photo: 'her-sel-bracelet.webp',
     date: '2023, one morning',
     title: 'At the school gate',
     description: "This is where I first saw you, in front of the school, in the morning light. I was in 11th std. I didn't know an ordinary morning could quietly change everything.",
   },
   {
-    photo: 'her-green2.jpg',
+    photo: 'her-green2.webp',
     date: 'since then',
     title: 'A few hellos',
     description: "We've only spoken a few times. I was nervous every single time, and I still remember each like a small treasure even though i got ghosted.",
   },
   {
-    photo: 'her-saree2.jpg',
+    photo: 'her-saree2.webp',
     date: 'one special day',
     title: 'The drawing competition',
     description: "You entered the drawing competition. I entered too. Somehow that day became one I'll carry with me forever.",
   },
   {
-    photo: 'her-hand2.jpg',
+    photo: 'her-hand2.webp',
     date: 'one ordinary day',
     video: HER_VIDEO,
     title: 'The video',
     description: "You posted a tiny video in your story. It was so sweet. I've watched it more than a thousand times, and it still feels like the first.",
   },
   {
-    photo: 'her-sel-white.jpg',
+    photo: 'her-sel-white.webp',
     date: 'today',
     title: 'Your birthday',
     description: "So I made this for you. Pirandha naal vazhthukkal, Vandhana. And at the end, there's one thing I've been wanting to ask you.",
@@ -135,10 +135,10 @@ export interface PlaceStar {
 }
 
 export const PLACES: PlaceStar[] = [
-  { x: 22, y: 30, photo: 'her-campus.jpg', name: 'What your smile does', memory: "It makes the whole world go quiet. All my worries disappear for a moment, and I just stand there, happy." },
-  { x: 55, y: 18, photo: 'her-bench.jpg', name: 'What I am scared of', memory: "That this may feel like too much. If it does, I'm sorry. I only couldn't keep it in my heart any longer." },
-  { x: 75, y: 45, photo: 'her-rocks.jpg', name: 'What I hope for', memory: "That you're happy, truly. Whatever you decide, that is the one wish I will always keep for you." },
-  { x: 38, y: 62, photo: 'her-sel-navy.jpg', name: 'What I want you to know', memory: "That you can take all the time you need. There's no rush and no pressure at all. Love that is real can wait." },
+  { x: 22, y: 30, photo: 'her-campus.webp', name: 'What your smile does', memory: "It makes the whole world go quiet. All my worries disappear for a moment, and I just stand there, happy." },
+  { x: 55, y: 18, photo: 'her-bench.webp', name: 'What I am scared of', memory: "That this may feel like too much. If it does, I'm sorry. I only couldn't keep it in my heart any longer." },
+  { x: 75, y: 45, photo: 'her-rocks.webp', name: 'What I hope for', memory: "That you're happy, truly. Whatever you decide, that is the one wish I will always keep for you." },
+  { x: 38, y: 62, photo: 'her-sel-navy.webp', name: 'What I want you to know', memory: "That you can take all the time you need. There's no rush and no pressure at all. Love that is real can wait." },
 ]
 
 // Photo stack — a scattered pile of cards. Each one shows a photo on the front;
@@ -146,27 +146,27 @@ export const PLACES: PlaceStar[] = [
 // Put images in /public/photos/ and reference the filename here. Leave `photo`
 // blank to show a placeholder heart instead of a missing image.
 export interface StackCard {
-  photo: string // e.g. 'us-1.jpg' — file must exist in /public/photos/
+  photo: string // e.g. 'us-1.webp' — file must exist in /public/photos/
   message: string
 }
 
 export const PHOTO_STACK: StackCard[] = [
-  { photo: 'her-bench2.jpg', message: "Vandhana, every time you smile, my whole day glows a little brighter." },
-  { photo: 'her-pillar.jpg', message: "When something good happens, you're the first person I want to tell. You always have been." },
-  { photo: 'her-maroon.jpg', message: "Love looks not with the eyes, but with the mind." },
-  { photo: 'her-tea5.jpg', message: "They say love at first sight isn't real. Then I saw you at the school gate." },
-  { photo: 'her-white.jpg', message: "Children have always liked the princess story, but they never knew what was her name. I think the princess was, is and will always be you." },
-  { photo: 'her-bw2.jpg', message: "When you love someone, you love the person as they are, and not as you'd like them to be." },
-  { photo: 'her-necklace.jpg', message: "Warning: looking at your photos for too long causes heart stop. I'm afraid I'm already a patient." },
-  { photo: 'her-ivy.jpg', message: "Are you a library book? Because I've been wanting to take you home since 11th std." },
-  { photo: 'her-stripes.jpg', message: "Can I be with you forever, Vandhana? There's no hurry. I'll wait for your answer, however long it takes." },
+  { photo: 'her-bench2.webp', message: "Vandhana, every time you smile, my whole day glows a little brighter." },
+  { photo: 'her-pillar.webp', message: "When something good happens, you're the first person I want to tell. You always have been." },
+  { photo: 'her-maroon.webp', message: "Love looks not with the eyes, but with the mind." },
+  { photo: 'her-tea5.webp', message: "They say love at first sight isn't real. Then I saw you at the school gate." },
+  { photo: 'her-white.webp', message: "Children have always liked the princess story, but they never knew what was her name. I think the princess was, is and will always be you." },
+  { photo: 'her-bw2.webp', message: "When you love someone, you love the person as they are, and not as you'd like them to be." },
+  { photo: 'her-necklace.webp', message: "Warning: looking at your photos for too long causes heart stop. I'm afraid I'm already a patient." },
+  { photo: 'her-ivy.webp', message: "Are you a library book? Because I've been wanting to take you home since 11th std." },
+  { photo: 'her-stripes.webp', message: "Can I be with you forever, Vandhana? There's no hurry. I'll wait for your answer, however long it takes." },
 ]
 
 // Photo-merge scene — two Polaroid-style cards that come together. Put images
 // in /public/photos/ and reference the filenames here. Leave either blank to
 // show a soft placeholder heart in its place instead of a missing image.
-export const YOUR_PHOTO = 'wc-him.jpg' // you — from the watercolor portrait
-export const HER_PHOTO = 'wc-her.jpg' // her — from the watercolor portrait
+export const YOUR_PHOTO = 'wc-him.webp' // you — from the watercolor portrait
+export const HER_PHOTO = 'wc-her.webp' // her — from the watercolor portrait
 export const MERGE_CAPTION = 'Us, in watercolour. Soft, and just a little dreamlike.'
 
 // Optional voice message — drop an mp3 into /public/sounds/ and set the filename here.
@@ -224,10 +224,10 @@ export interface AgeMilestone {
 
 
 export const AGE_MILESTONES: AgeMilestone[] = [
-  { photo: 'her-glow.jpg', age: 'when I think of you', text: "I carry your heart with me (I carry it in my heart)." },
-  { photo: 'her-necklace.jpg', age: 'when I see you', text: "They say don't stare at the sun for too long. Nobody warned me about you, cause you glow even more." },
-  { photo: 'her-warm.jpg', age: 'when we talk', text: "Kadhal vandha kavidhai varum, they say. For me it's an awkward silence and a very red face." },
-  { photo: 'her-yellow.jpg', age: 'every morning', text: "I took the same road every morning for you. Honestly, that road should be thanking you." },
+  { photo: 'her-glow.webp', age: 'when I think of you', text: "I carry your heart with me (I carry it in my heart)." },
+  { photo: 'her-necklace.webp', age: 'when I see you', text: "They say don't stare at the sun for too long. Nobody warned me about you, cause you glow even more." },
+  { photo: 'her-warm.webp', age: 'when we talk', text: "Kadhal vandha kavidhai varum, they say. For me it's an awkward silence and a very red face." },
+  { photo: 'her-yellow.webp', age: 'every morning', text: "I took the same road every morning for you. Honestly, that road should be thanking you." },
 ]
 
 // Balloon-pop message — each word is one balloon; popping them all spells this out.
@@ -260,7 +260,7 @@ export const GIFT_VOUCHER = ''
 // Scratch card scene — hidden message under the scratch-off layer.
 export const SCRATCH_MESSAGE = 'Surprise! Happy birthday, Vandhana. looking like the sweetest thing in the room. 🎂'
 // Optional photo shown instead of/alongside the message. File must exist in /public/photos/.
-export const SCRATCH_IMAGE = 'her-cake.jpg'
+export const SCRATCH_IMAGE = 'her-cake.webp'
 
 // Cake scene — message revealed after the candles are blown out and the cake is cut.
 export const CAKE_SLICE_MESSAGE = "I hope every wish you made today finds its way to you. And if one of them is me, I won't mind at all. 🍓"
@@ -319,7 +319,7 @@ export const ONE_THING_CLOSING = "That's it. That's my one wish, with all my hea
 // A short, deliberately uneventful pause scene — no buttons, no
 // interaction, just a photo and a little quiet. Set PAUSE_PHOTO to a
 // filename in /public/photos/ or leave blank for a soft placeholder.
-export const PAUSE_PHOTO = 'her-hand.jpg'
+export const PAUSE_PHOTO = 'her-hand.webp'
 export const PAUSE_SECONDS = 90 // 9 pickup lines x 10s each, so every line gets shown
 
 // ============================================================
@@ -356,12 +356,12 @@ export interface Observation {
 }
 
 export const OBSERVATIONS: Observation[] = [
-  { text: "You turn small moments into something special without even trying. I don't think you realise it.", annotation: 'I noticed.', photo: 'her-tea4.jpg' },
-  { text: "The blinking of eyes is an involuntary reflex action, provided they eyes are not watching your beauty.", annotation: 'blushing yet?', photo: 'her-sel-navy2.jpg' },
-  { text: "To love someone means to see them as God intended them.", photo: 'her-close2.jpg' },
-  { text: "I'd climb any hill, cross any road, and walk through any tea garden, just to stand where you're standing.", annotation: 'I would, you know.', photo: 'her-bangles.jpg' },
-  { text: "Your smile needs a warning label: may cause sudden happiness and a very silly grin. Mine, mostly.", annotation: 'consider yourself warned.', photo: 'her-stream.jpg' },
-  { text: "I think love is when someone's happiness slowly becomes your own. Somewhere along the way, yours quietly became mine.", photo: 'her-window.jpg' },
+  { text: "You turn small moments into something special without even trying. I don't think you realise it.", annotation: 'I noticed.', photo: 'her-tea4.webp' },
+  { text: "The blinking of eyes is an involuntary reflex action, provided they eyes are not watching your beauty.", annotation: 'blushing yet?', photo: 'her-sel-navy2.webp' },
+  { text: "To love someone means to see them as God intended them.", photo: 'her-close2.webp' },
+  { text: "I'd climb any hill, cross any road, and walk through any tea garden, just to stand where you're standing.", annotation: 'I would, you know.', photo: 'her-bangles.webp' },
+  { text: "Your smile needs a warning label: may cause sudden happiness and a very silly grin. Mine, mostly.", annotation: 'consider yourself warned.', photo: 'her-stream.webp' },
+  { text: "I think love is when someone's happiness slowly becomes your own. Somewhere along the way, yours quietly became mine.", photo: 'her-window.webp' },
 ]
 
 export const OBSERVATIONS_COVER_TITLE = 'little things I love about you'
@@ -413,14 +413,14 @@ export interface ReelSlide {
 export const REEL_INTRO = 'a few frames my heart keeps'
 
 export const REEL_SLIDES: ReelSlide[] = [
-  { photo: 'her-campus2.jpg', line: "Vandhana, some mornings are only bright because one road happened to lead to you." },
-  { photo: 'her-saree.jpg', line: "Calm, graceful, so completely you. I could look at this one all day and never tire of it." },
-  { photo: 'her-poster.jpg', line: "You turn ordinary light into something a painter would stay up all night to catch." },
-  { photo: 'her-jhumka.jpg', line: "That smile. If I could keep only one thing in the whole world, I'd choose that." },
-  { photo: 'her-tea2.jpg', line: "Whatever you wear, wherever you are, my eyes find you first. They've always been disobedient that way." },
-  { photo: 'her-balcony.jpg', line: "If I could, I'd stand right beside you and never leave. Not even for a second." },
-  { photo: 'her-green3.jpg', line: "You glow, Vandhana. Not the photo, not the light. You." },
-  { photo: 'her-dream.jpg', line: "Can I be with you forever? I promise to take care of that smile, and of you." },
+  { photo: 'her-campus2.webp', line: "Vandhana, some mornings are only bright because one road happened to lead to you." },
+  { photo: 'her-saree.webp', line: "Calm, graceful, so completely you. I could look at this one all day and never tire of it." },
+  { photo: 'her-poster.webp', line: "You turn ordinary light into something a painter would stay up all night to catch." },
+  { photo: 'her-jhumka.webp', line: "That smile. If I could keep only one thing in the whole world, I'd choose that." },
+  { photo: 'her-tea2.webp', line: "Whatever you wear, wherever you are, my eyes find you first. They've always been disobedient that way." },
+  { photo: 'her-balcony.webp', line: "If I could, I'd stand right beside you and never leave. Not even for a second." },
+  { photo: 'her-green3.webp', line: "You glow, Vandhana. Not the photo, not the light. You." },
+  { photo: 'her-dream.webp', line: "Can I be with you forever? I promise to take care of that smile, and of you." },
 ]
 
 export const REEL_OUTRO = 'and so many more days I want to spend making you smile.'
@@ -428,14 +428,14 @@ export const REEL_OUTRO = 'and so many more days I want to spend making you smil
 // ============================================================
 // 🖼️ SINGLE-PHOTO SPOTS — each uses a portrait of her (files in /public/photos)
 // ============================================================
-export const SPLASH_PHOTO = 'her-green.jpg'
-export const MUSEUM_PHOTO = 'her-bw.jpg'
-export const LETTER_PHOTO = 'her-mirror.jpg'
-export const GIFT_PHOTO = 'her-tea.jpg'
-export const CARD_COVER_PHOTO = 'her-flower.jpg'
-export const HERO_HEART_PHOTO = 'her-close.jpg'
-export const CAKE_BUNTING: string[] = ['her-purple.jpg', 'her-ivy.jpg']
-export const CAKE_CUT_PHOTO = 'her-crimson.jpg'
+export const SPLASH_PHOTO = 'her-green.webp'
+export const MUSEUM_PHOTO = 'her-bw.webp'
+export const LETTER_PHOTO = 'her-mirror.webp'
+export const GIFT_PHOTO = 'her-tea.webp'
+export const CARD_COVER_PHOTO = 'her-flower.webp'
+export const HERO_HEART_PHOTO = 'her-close.webp'
+export const CAKE_BUNTING: string[] = ['her-purple.webp', 'her-ivy.webp']
+export const CAKE_CUT_PHOTO = 'her-crimson.webp'
 
 // Every portrait of her, in the order they drift across the opening wall.
 export const WALL_PHOTOS: string[] = [
@@ -450,10 +450,10 @@ export const WALL_PHOTOS: string[] = [
 ]
 
 // Chapter 21 — "just breathe": her photos drift in and out with each breath.
-export const ONE_MINUTE_PHOTOS: string[] = ['her-chin.jpg', 'her-bw2.jpg', 'her-bw3.jpg', 'her-handchin.jpg', 'her-bow.jpg']
+export const ONE_MINUTE_PHOTOS: string[] = ['her-chin.webp', 'her-bw2.webp', 'her-bw3.webp', 'her-handchin.webp', 'her-bow.webp']
 
 // Chapter 22 — one photo for each part of "if I could give you one thing".
-export const ONE_THING_PHOTOS: string[] = ['her-flower.jpg', 'her-close.jpg', 'her-green.jpg']
+export const ONE_THING_PHOTOS: string[] = ['her-flower.webp', 'her-close.webp', 'her-green.webp']
 
 // Chapter 21 — little lines to make her smile while she breathes.
 export const PICKUP_LINES: string[] = [

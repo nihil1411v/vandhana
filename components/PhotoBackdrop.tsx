@@ -34,7 +34,7 @@ export default function PhotoBackdrop({ tone = 'light', strength }: { tone?: 'li
                     }}
                   >
                     <div style={{ width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }}>
-                      <ZoomImg file={`${f}.jpg`} dir="photos/t" />
+                      <ZoomImg file={`${f}.webp`} dir="photos/t" />
                     </div>
                   </div>
                 ))}

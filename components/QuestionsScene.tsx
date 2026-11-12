@@ -434,7 +434,7 @@ function ProposalEnding({ kind }: { kind: 'yes' | 'no' }) {
         ))}
       {yes && (
         <motion.div initial={{ scale: 0.3, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.3 }}>
-          <HeartPhoto file="us-watercolor.jpg" width={230} />
+          <HeartPhoto file="us-watercolor.webp" width={230} />
         </motion.div>
       )}
       <motion.p

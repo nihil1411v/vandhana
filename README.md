@@ -80,9 +80,9 @@ export const PASSCODE = ''
 export const REASONS = [ /* 20+ short reasons, shuffled + swipeable */ ]
 export const MEMORIES = [ /* timeline milestones */ ]
 export const PLACES = [ /* constellation stars */ ]
-export const PHOTO_STACK = [ { photo: 'us-1.jpg', message: '...' }, /* ... */ ] // drop images in /public/photos/
-export const YOUR_PHOTO = ''          // e.g. 'me.jpg' — drop into /public/photos/, shown on the Swipe scene
-export const HER_PHOTO = ''           // e.g. 'her.jpg' — same folder
+export const PHOTO_STACK = [ { photo: 'us-1.webp', message: '...' }, /* ... */ ] // drop images in /public/photos/
+export const YOUR_PHOTO = ''          // e.g. 'me.webp' — drop into /public/photos/, shown on the Swipe scene
+export const HER_PHOTO = ''           // e.g. 'her.webp' — same folder
 export const MERGE_CAPTION = 'A moment, made of both of us.'
 export const LETTER_TEXT = `...`
 export const VOICE_MESSAGE_FILE = ''
@@ -146,7 +146,7 @@ const NAME = 'Her Name Here'  // ← change this
 
 ### Add real photos
 In `components/RevealScene.tsx` and `components/FinalScene.tsx`:
-- Replace the placeholder `<div>` with `<Image src="/photos/her.jpg" ... />`
+- Replace the placeholder `<div>` with `<Image src="/photos/her.webp" ... />`
 - Drop your images into `/public/photos/`
 
 ### Add your personal message

@@ -56,7 +56,7 @@ export default function HeartScene({ onComplete }: Props) {
     <motion.div
       className="scene flex flex-col items-center justify-center select-none"
       style={{
-        backgroundImage: 'url(/heart-bg.png)',
+        backgroundImage: 'url(/heart-bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center bottom',
         backgroundRepeat: 'no-repeat',
@@ -93,7 +93,7 @@ export default function HeartScene({ onComplete }: Props) {
           whileTap={{ scale: 0.97 }}
         >
           <img
-            src="/heart-img.png"
+            src="/heart-img.webp"
             alt="heart"
             style={{
               width: 220 + step * 10,

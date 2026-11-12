@@ -96,7 +96,7 @@ export default function RevealScene({ onComplete }: Props) {
             key="bg-reveal"
             className="absolute inset-0"
             style={{
-              backgroundImage: 'url(/bg-reveal.png)',
+              backgroundImage: 'url(/bg-reveal.webp)',
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -114,7 +114,7 @@ export default function RevealScene({ onComplete }: Props) {
             key="bg-photo"
             className="absolute inset-0"
             style={{
-              backgroundImage: 'url(/bg-photo.png)',
+              backgroundImage: 'url(/bg-photo.webp)',
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -210,7 +210,7 @@ export default function RevealScene({ onComplete }: Props) {
 
           {/* Watercolor heart image */}
           <img
-            src="/heart.png"
+            src="/heart.webp"
             alt="heart"
             draggable={false}
             style={{

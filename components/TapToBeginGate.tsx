@@ -38,7 +38,7 @@ function PhotoWall() {
                   }}
                 >
                   <div style={{ width: '100%', aspectRatio: '4 / 5', overflow: 'hidden' }}>
-                    <ZoomImg file={`${f}.jpg`} dir="photos/t" />
+                    <ZoomImg file={`${f}.webp`} dir="photos/t" />
                   </div>
                 </div>
               ))}
@@ -197,7 +197,7 @@ export default function TapToBeginGate({ onBegin }: Props) {
               </span>
             ))}
           </div>
-          <HeartPhoto file="us-watercolor.jpg" width={236} />
+          <HeartPhoto file="us-watercolor.webp" width={236} />
         </motion.div>
 
         <div className="flex flex-col items-center" style={{ gap: 10, minHeight: 190 }}>
